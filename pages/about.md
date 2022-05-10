@@ -11,6 +11,6 @@ This project will focus on Windows Server Infrastructure.
 
 # How to build this site
 
-This site is hosted on https://pages.github.com
+This site is hosted on [GitHub Pages](https://pages.github.com)
 
-Using template of docsy-jekyll https://github.com/vsoch/docsy-jekyll
+Using template of [Docsy Jekyll Theme](https://github.com/vsoch/docsy-jekyll)
