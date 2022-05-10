@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Docsy Jekyll Theme
+title: Wintel Alphabook
 permalink: /
 ---
 
-# Welcome to Docsy Jekyll
+# Welcome to Wintel Alphabook
 
 This is a starter template for a docsy jekyll theme.
 
