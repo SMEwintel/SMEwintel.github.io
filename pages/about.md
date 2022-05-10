@@ -3,7 +3,7 @@ title: About
 permalink: /about/
 ---
 
-# About
+# About Wintel Alphabook
 
 Alphabook Ltd. is a fictional company (Small and Medium-sized Enterprise). As IT administrator, the primary role is to oversee and maintain all aspects of the company’s computer infrastructure. This includes maintaining network, server, storage, system and application. 
 
