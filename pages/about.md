@@ -5,11 +5,6 @@ permalink: /about/
 
 # About
 
-This is a [starter template](https://vsoch.github.io/docsy-jekyll/) for a Docsy jekyll theme, based
-on the Beautiful [Docsy](https://github.com/google/docsy) that renders with Hugo. This version is intended for
-native deployment on GitHub pages. See the [respository]({{ site.repo }}) for more details.
+Alphabook Ltd. is a fictional company (Small and Medium-sized Enterprise). As IT administrator, the primary role is to oversee and maintain all aspects of the company’s computer infrastructure. This includes maintaining network, server, storage, system and application. 
 
-## Support
-
-If you need help, please don't hesitate to [open an issue](https://www.github.com/{{ site.github_user }}/{{ site.github_repo }}).
-
+This project will focus on Windows Server Infrastructure.
