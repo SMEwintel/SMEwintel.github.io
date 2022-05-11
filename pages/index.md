@@ -8,7 +8,7 @@ permalink: /
 
 This is a starter template for a docsy jekyll theme.
 
-![assets/img/ab45.png](assets/img/ab45.png)
+![assets/img/ab.png](assets/img/ab.png)
 
 ## Network Topology
 
