@@ -33,23 +33,36 @@ IP Addresses reserved for use on private networks
 ### Example of a company with three Offices
 
 ```bash
-Beijing Office 10.10.0.0/16
-Shanghai Office 10.20.0.0/16
-Shenzhen Office 10.30.0.0/16
+Beijing Office 10.10.0.0/255.255.0.0
+Shanghai Office 10.20.0.0/255.255.0.0
+Shenzhen Office 10.30.0.0/255.255.0.0
 ```
 
 ### Example of Beijing office
 
 ```bash
-Windows Server 10.10.10.0/24 (Available IP address 10.10.10.1 - 10.10.10.254)
-Linux Server 10.10.20.0/23 (Available IP address 10.10.20.1 - 10.10.21.254)
+Windows Server 10.10.10.0/255.255.255.0 (Available IP address 10.10.10.1 - 10.10.10.254)
+Linux Server 10.10.20.0/255.255.254.0 (Available IP address 10.10.20.1 - 10.10.21.254)
 ```
 
 Windows Domain Controller
 ```bash
-BJDC01 10.10.10.10
-BJDC02 10.10.10.11
+BJDC01 10.10.10.10/255.255.255.0
+BJDC02 10.10.10.11/255.255.255.0
 ```
 
 ## Windows Active Directory
 
+### Active Directory Domain Service Design
+
+* Single forest single domain is preferred, 2,150,000,000 objects per domain, FQDN less than 64 characters
+* Selecting the Forest Root Domain (corp.alphabook.cn) https://technet.microsoft.com/en-us/library/cc726016(v=ws.10).aspx
+* PDC acts as a key role (time root in forest, etc)
+* Implement multiple/backup domain controllers (all GCs)
+* Implement multiple sites as needed (site, subnet,site link(180 minutes default, 15 minutes minimum), bridge all site links(default))
+* Enable [[Active Directory Recycle Bin]]
+* Enable [[Protect object from accidental deletion]] (User, OU, etc)
+* Fill more AD account properties (City, Country, Phone, Job Title, Department, Manager...) [[Create AD user with PowerShell]]
+* Grant permission per group, not a single user
+* [[Account Lockout]] Policy
+* [[Delegate IT helpdesk group join computer into domain permission]]
