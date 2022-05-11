@@ -26,9 +26,9 @@ IP Addresses reserved for use on private networks
 
 ### Choosing private IPv4 address
 
-1. We need to have enough IP address for all devices (Desktop, Laptop, Mobile, etc), Class A may be good choose. 
+1. We need to reserve enough IP address for all devices (Desktop, Laptop, Mobile, etc), Class A may be good choose. 
 
-2. Pay attention to IP confiction in your environment (For example Docker may use IP address of Class B).
+2. Pay attention to potential IP confiction in your environment (Docker may use IP address of Class B, etc).
 
 ## Windows Active Directory
 
