@@ -1,7 +1,7 @@
 - title: Windows Server Infrastructure
   url: docs
   links:
-    - title: "Getting Started"
+    - title: "Active Directory"
       url: "docs/getting-started"
       children:
         - title: Features
@@ -10,7 +10,15 @@
           url: "docs/getting-started#development"
         - title: Customization
           url: "docs/getting-started#customization"
-    - title: "About"
+    - title: "DHCP"
+      url: "docs/getting-started"
+    - title: "File Share"
+      url: "docs/getting-started"
+    - title: "Printing"
+      url: "docs/getting-started"
+    - title: "Operation System Deployment"
+      url: "docs/getting-started"
+- title: "About"
       url: "about"
     - title: "News"
       url: "news"
