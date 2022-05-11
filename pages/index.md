@@ -19,22 +19,13 @@ Network is the basis of the whole IT infrastructure. We can not imagine the situ
 IP Addresses reserved for use on private networks
 
 Class A
-
-```bash
-10.0.0.0 to 10.255.255.255
-```
+>10.0.0.0 to 10.255.255.255
 
 Class B
-
-```bash
-172.16.0.0 to 172.31.255.255
-```
+>172.16.0.0 to 172.31.255.255
 
 Class C
-
-```bash
-192.168.0.0 to 192.168.255.255
-```
+>192.168.0.0 to 192.168.255.255
 
 ## Windows Active Directory
 
