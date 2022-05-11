@@ -27,5 +27,7 @@ Class B
 Class C
 >192.168.0.0 to 192.168.255.255
 
+{% include alert.html type="info" title="Choosing private IPv4 address" content="1. We need to have enough IP address for devices; 2. Pay attention to IP confiction(For example Docker may use IP address of Class B)." %}
+
 ## Windows Active Directory
 
