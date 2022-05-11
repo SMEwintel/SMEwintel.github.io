@@ -14,7 +14,7 @@
       url: "docs/getting-started"
     - title: "WSUS"
       url: "docs/getting-started"
-- title: "File Share"
+    - title: "File Share"
       url: "docs/getting-started"
     - title: "Printing"
       url: "docs/getting-started"
