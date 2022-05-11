@@ -10,12 +10,15 @@
           url: "docs/getting-started#development"
         - title: Customization
           url: "docs/getting-started#customization"
+ 
+   links:
     - title: "DHCP"
       url: "docs/getting-started"
+ 
+   links:
     - title: "File Share"
-      url: "docs/getting-started"      
-    - title: "Printing"
-      url: "docs/getting-started"      
+      url: "docs/getting-started"
+ 
   links:
     - title: Quizzes
       url: "docs/extras/example-quiz"
