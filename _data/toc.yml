@@ -2,7 +2,7 @@
   url: docs
   links:
     - title: "Active Directory Domain Services"
-      url: "/pages/index.md"
+      url: "/pages/index"
       children:
         - title: Features
           url: "docs/getting-started#getting-started"
