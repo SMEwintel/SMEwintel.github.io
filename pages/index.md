@@ -10,7 +10,7 @@ permalink: /
 
 # Welcome to Wintel Alphabook
 
-![assets/img/ab.png](assets/img/ab.png)
+![assets/img/ad.png](assets/img/ad.png)
 
 ## Network Topology
 
