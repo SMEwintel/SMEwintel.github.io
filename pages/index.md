@@ -72,6 +72,7 @@ BJDC02 10.10.10.11/255.255.255.0
 
 1. Install Windows Server 2019 Standard Operation System
 ```bash
+# Check Operating System version
 (Get-WmiObject -Class Win32_OperatingSystem).Caption
 Microsoft Windows Server 2019 Standard
 ```
@@ -133,7 +134,7 @@ Click "Install" after Prerequisites Check done
 6. Configure time
 ```bash
 # By default, the first domain controller is PDC too, PDC is the time root of the forest.
- w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
+w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
 ```
 
 7. FSMO Role Holders
