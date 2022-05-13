@@ -70,14 +70,16 @@ BJDC02 10.10.10.11/255.255.255.0
 
 ### Install first domain controller
 
-1. Install Windows Server 2019 Standard Operation System
+#### Install Windows Server 2019 Standard Operation System
+
 ```bash
 # Check Operating System version
 (Get-WmiObject -Class Win32_OperatingSystem).Caption
 Microsoft Windows Server 2019 Standard
 ```
 
-2. Rename hostname
+#### Rename hostname
+
 ```bash
 # BJ stands for Beijing
 # DC stands for Domain Controller
@@ -86,7 +88,8 @@ Restart-Computer
 Get-Content Env:COMPUTERNAME
 ```
 
-3. Configure IP information as below:
+#### Configure IP information as below:
+
 ```bash
 IP address: 10.10.10.10
 Subnet mask: 255.255.255.0
@@ -94,7 +97,8 @@ Default gateway: 10.10.10.1
 Preferred DNS server: 10.10.10.10
 ```
 
-4. Install Active Directory Domain Services
+#### Install Active Directory Domain Services
+
 ```bash
 From Start Menu, Click "Server Manager"
 Click "Add roles and features"
@@ -109,7 +113,7 @@ Click "Install"
 Click "Close" when finish
 ```
 
-5. Post-deployment Configuration
+#### Post-deployment Configuration
 
 ![assets/img/dc-promote.png](assets/img/dc-promote.png)
 
@@ -131,14 +135,14 @@ Click "Next"
 Click "Install" after Prerequisites Check done
 ```
 
-6. Configure time
+#### Configure time
 
 ```bash
 # By default, the first domain controller is PDC too, PDC is the time root of the forest.
 w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
 ```
 
-7. FSMO Role Holders
+#### FSMO Role Holders
 
 {% include alert.html type="warning" title="Schema master / Forest level" content="To make change Schema in forest (such as implement Exchange, Lync, SCCM)" %}
 
