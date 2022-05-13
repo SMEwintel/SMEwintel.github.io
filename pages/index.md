@@ -52,9 +52,7 @@ BJDC01 10.10.10.10/255.255.255.0
 BJDC02 10.10.10.11/255.255.255.0
 ```
 
-## Windows Active Directory
-
-### Active Directory Domain Service Design
+## Active Directory Domain Service Design
 
 * Single forest single domain is preferred, 2,150,000,000 objects per domain, FQDN less than 64 characters
 * Selecting the Forest Root Domain (corp.alphabook.cn) https://technet.microsoft.com/en-us/library/cc726016(v=ws.10).aspx
@@ -68,9 +66,9 @@ BJDC02 10.10.10.11/255.255.255.0
 * [[Account Lockout]] Policy
 * [[Delegate IT helpdesk group join computer into domain permission]]
 
-### Install first domain controller
+## Install first domain controller
 
-#### Install Windows Server 2019 Standard Operation System
+### Install Windows Server 2019 Standard Operation System
 
 ```bash
 # Check Operating System version
@@ -78,7 +76,7 @@ BJDC02 10.10.10.11/255.255.255.0
 Microsoft Windows Server 2019 Standard
 ```
 
-#### Rename hostname
+### Rename hostname
 
 ```bash
 # BJ stands for Beijing
@@ -88,7 +86,7 @@ Restart-Computer
 Get-Content Env:COMPUTERNAME
 ```
 
-#### Configure IP information as below:
+### Configure IP information as below:
 
 ```bash
 IP address: 10.10.10.10
@@ -97,7 +95,7 @@ Default gateway: 10.10.10.1
 Preferred DNS server: 10.10.10.10
 ```
 
-#### Install Active Directory Domain Services
+### Install Active Directory Domain Services
 
 ```bash
 From Start Menu, Click "Server Manager"
@@ -113,7 +111,7 @@ Click "Install"
 Click "Close" when finish
 ```
 
-#### Post-deployment Configuration
+### Post-deployment Configuration
 
 ![assets/img/dc-promote.png](assets/img/dc-promote.png)
 
@@ -135,14 +133,14 @@ Click "Next"
 Click "Install" after Prerequisites Check done
 ```
 
-#### Configure time
+### Configure time
 
 ```bash
 # By default, the first domain controller is PDC too, PDC is the time root of the forest.
 w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
 ```
 
-#### FSMO Role Holders
+### FSMO Role Holders
 
 {% include alert.html type="warning" title="Schema master / Forest level" content="To make change Schema in forest (such as implement Exchange, Lync, SCCM)" %}
 
@@ -182,4 +180,4 @@ BJDC01.alphabook.cn  BJDC01.alphabook.cn BJDC01.alphabook.cn
 ```
 
 
-### Install second/backup domain controller
+## Install second/backup domain controller
