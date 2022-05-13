@@ -67,3 +67,31 @@ BJDC02 10.10.10.11/255.255.255.0
 * Grant permission per group, not a single user
 * [[Account Lockout]] Policy
 * [[Delegate IT helpdesk group join computer into domain permission]]
+
+### Install first domain controller
+
+1. Install Windows Server 2019 Standard Operation System
+```bash
+(Get-WmiObject -Class Win32_OperatingSystem).Caption
+Microsoft Windows Server 2019 Standard
+```
+
+2. Rename hostname
+```bash
+# BJ stands for Beijing
+# DC stands for Domain Controller
+Rename-Computer BJDC01
+Restart-Computer
+Get-Content Env:COMPUTERNAME
+```
+
+3. Configure IP information as below:
+```bash
+IP address: 10.10.10.10
+Subnet mask: 255.255.255.0
+Default gateway: 10.10.10.1
+Preferred DNS server: 10.10.10.10
+```
+
+
+### Install second/backup domain controller
