@@ -93,5 +93,85 @@ Default gateway: 10.10.10.1
 Preferred DNS server: 10.10.10.10
 ```
 
+4. Install Active Directory Domain Services
+```bash
+From Start Menu, Click "Server Manager"
+Click "Add roles and features"
+Click "Next"
+Keep default option "Role-based or feature-based installation", Click "Next"
+Keep defaut option, Click "Next"
+Select "Active Directory Domain Services", and Click "Add Features" from the pop up window
+Click "Next"
+Click "Next"
+Click "Next"
+Click "Install"
+Click "Close" when finish
+```
+
+5. Post-deployment Configuration
+![assets/img/dc-promote.png](assets/img/dc-promote.png)
+```bash
+Click "Flag" icon
+Click "Promote this server to a domain controller"
+Select "Add a new forest", input "alphabook.cn" as "Root domain name", click "Next"
+Keep default option
+# Forest functional level: Windows Server 2016
+# Domain functional level: Windows Server 2016
+# Domain Name System (DNS) Server checked
+# Global Catalog (GC) checked
+# Read only domain controller (RODC) unchecked and unavailabled for the first Domain Controller
+Input the Directory Services Restore Mode (DSRM) password, click "Next"
+Keep default DNS Options, click "Next"
+Keep default NetBIOS domain name, click "Next"
+Keep default options of AD DS database, log files, and SYSVOL, click "Next"
+Click "Next"
+Click "Install" after Prerequisites Check done
+```
+
+6. Configure time
+```bash
+# By default, the first domain controller is PDC too, PDC is the time root of the forest.
+ w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
+```
+
+7. FSMO Role Holders
+
+{% include alert.html type="warning" title="Schema master / Forest level" content="To make change Schema in forest (such as implement Exchange, Lync, SCCM)" %}
+
+{% include alert.html type="danger" title="Domain naming master / Forest level" content="To add/remove domain in forest" %}
+
+{% include alert.html type="success" title="PDC / Domain level" content="Time root in forest (PDC->DCs->Computers)
+Group policy central management
+Handle password change specially (the change will sync to PDC immediately)
+Handle user account lock specially" %}
+
+{% include alert.html type="info" title="RID pool master / Domain level" content="Assign RIDs to DCs (500/time)" %}
+
+{% include alert.html type="primary" title="Infrastucture master / Domain level" content="Objects reference in different domains" %}
+
+Get list of FSMO role holders
+```bash
+netdom query fsmo
+Schema master               BJDC01.alphabook.cn
+Domain naming master        BJDC01.alphabook.cn
+PDC                         BJDC01.alphabook.cn
+RID pool manager            BJDC01.alphabook.cn
+Infrastructure master       BJDC01.alphabook.cn
+```
+
+or
+```bash
+# Forest Level
+Get-ADForest | Select-Object DomainNamingMaster, SchemaMaster
+DomainNamingMaster  SchemaMaster       
+------------------  ------------       
+BJDC01.alphabook.cn BJDC01.alphabook.cn
+# Domain Level
+Get-ADDomain | Select-Object InfrastructureMaster, RIDMaster, PDCEmulator
+InfrastructureMaster RIDMaster           PDCEmulator        
+-------------------- ---------           -----------        
+BJDC01.alphabook.cn  BJDC01.alphabook.cn BJDC01.alphabook.cn
+```
+
 
 ### Install second/backup domain controller
