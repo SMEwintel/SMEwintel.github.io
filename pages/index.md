@@ -132,6 +132,7 @@ Click "Install" after Prerequisites Check done
 ```
 
 6. Configure time
+
 ```bash
 # By default, the first domain controller is PDC too, PDC is the time root of the forest.
 w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
