@@ -52,7 +52,7 @@ BJDC01 10.10.10.10/255.255.255.0
 BJDC02 10.10.10.11/255.255.255.0
 ```
 
-## Active Directory Domain Service Design
+## Active Directory Domain Services Design
 
 * Single forest single domain is preferred, 2,150,000,000 objects per domain, FQDN less than 64 characters
 * Selecting the Forest Root Domain (corp.alphabook.cn) https://technet.microsoft.com/en-us/library/cc726016(v=ws.10).aspx
@@ -68,7 +68,7 @@ BJDC02 10.10.10.11/255.255.255.0
 
 ## Install first domain controller
 
-### Install Windows Server 2019 Standard Operation System
+### Install Windows Server 2019
 
 ```bash
 # Check Operating System version
@@ -86,7 +86,7 @@ Restart-Computer
 Get-Content Env:COMPUTERNAME
 ```
 
-### Configure IP information as below:
+### Configure IP information
 
 ```bash
 IP address: 10.10.10.10
