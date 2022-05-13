@@ -146,10 +146,7 @@ w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /sy
 
 {% include alert.html type="danger" title="Domain naming master / Forest level" content="To add/remove domain in forest" %}
 
-{% include alert.html type="success" title="PDC / Domain level" content="Time root in forest (PDC->DCs->Computers)
-Group policy central management
-Handle password change specially (the change will sync to PDC immediately)
-Handle user account lock specially" %}
+{% include alert.html type="success" title="PDC / Domain level" content="Time root in forest (PDC->DCs->Computers); Group policy central management; Handle password change specially (the change will sync to PDC immediately); Handle user account lock specially" %}
 
 {% include alert.html type="info" title="RID pool master / Domain level" content="Assign RIDs to DCs (500/time)" %}
 
