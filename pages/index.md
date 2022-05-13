@@ -109,7 +109,9 @@ Click "Close" when finish
 ```
 
 5. Post-deployment Configuration
+
 ![assets/img/dc-promote.png](assets/img/dc-promote.png)
+
 ```bash
 Click "Flag" icon
 Click "Promote this server to a domain controller"
