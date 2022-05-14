@@ -264,8 +264,10 @@ Click "Next"
 Click "Install" after Prerequisites Check done
 ```
 
-List domain controller
+List domain controllers
+
 ```bash
+# Get all domain controllers
 Get-ADGroupMember "Domain Controllers"
 
 distinguishedName : CN=BJDC02,OU=Domain Controllers,DC=alphabook,DC=cn
@@ -282,11 +284,37 @@ objectGUID        : 8d1cf2be-0c95-4815-8e74-5ed711c62146
 SamAccountName    : BJDC01$
 SID               : S-1-5-21-1387974904-744306665-268114308-1000
 
-# 
+# Get all domain controllers and get basic information
 Get-ADGroupMember "Domain Controllers" | Get-ADDomainController | Select-Object Name,Forest,Domain,Site,IsGlobalCatalog,IPv4Address | Format-Table
 
 Name   Forest       Domain       Site                    IsGlobalCatalog IPv4Address
 ----   ------       ------       ----                    --------------- -----------
 BJDC02 alphabook.cn alphabook.cn Default-First-Site-Name            True 10.10.10.11
 BJDC01 alphabook.cn alphabook.cn Default-First-Site-Name            True 10.10.10.10
+```
+
+Get list of FSMO role holders
+
+```bash
+netdom query fsmo
+Schema master               BJDC01.alphabook.cn
+Domain naming master        BJDC01.alphabook.cn
+PDC                         BJDC01.alphabook.cn
+RID pool manager            BJDC01.alphabook.cn
+Infrastructure master       BJDC01.alphabook.cn
+```
+
+or
+
+```bash
+# Forest Level
+Get-ADForest | Select-Object DomainNamingMaster, SchemaMaster
+DomainNamingMaster  SchemaMaster       
+------------------  ------------       
+BJDC01.alphabook.cn BJDC01.alphabook.cn
+# Domain Level
+Get-ADDomain | Select-Object InfrastructureMaster, RIDMaster, PDCEmulator
+InfrastructureMaster RIDMaster           PDCEmulator        
+-------------------- ---------           -----------        
+BJDC01.alphabook.cn  BJDC01.alphabook.cn BJDC01.alphabook.cn
 ```
