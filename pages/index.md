@@ -178,3 +178,115 @@ BJDC01.alphabook.cn  BJDC01.alphabook.cn BJDC01.alphabook.cn
 
 
 ## Install second/backup domain controller
+
+### Install Windows Server 2019
+
+```bash
+# Check Operating System version
+(Get-WmiObject -Class Win32_OperatingSystem).Caption
+Microsoft Windows Server 2019 Standard
+```
+
+### Rename hostname
+
+```bash
+# BJ stands for Beijing
+# DC stands for Domain Controller
+Rename-Computer BJDC02
+Restart-Computer
+Get-Content Env:COMPUTERNAME
+```
+
+### Configure IP information
+
+```bash
+IP address: 10.10.10.11
+Subnet mask: 255.255.255.0
+Default gateway: 10.10.10.1
+Preferred DNS server: 10.10.10.10
+```
+
+### Join Domain
+
+```bash
+# Do a ping test
+ping alphabook.cn
+
+Pinging alphabook.cn [10.10.10.10] with 32 bytes of data:
+Reply from 10.10.10.10: bytes=32 time<1ms TTL=128
+Reply from 10.10.10.10: bytes=32 time<1ms TTL=128
+Reply from 10.10.10.10: bytes=32 time<1ms TTL=128
+Reply from 10.10.10.10: bytes=32 time<1ms TTL=128
+
+Ping statistics for 10.10.10.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+# Join Domain
+Add-Computer –Domainname "alphabook.cn"  -Restart
+```
+
+### Install Active Directory Domain Services
+
+```bash
+# Log in with domain administrator (alphabook\administrator)
+From Start Menu, Click "Server Manager"
+Click "Add roles and features"
+Click "Next"
+Keep default option "Role-based or feature-based installation", Click "Next"
+Keep defaut option, Click "Next"
+Select "Active Directory Domain Services", Click "Next"
+Click "Next"
+Click "Next"
+Click "Install"
+Click "Close" when finish
+```
+
+### Post-deployment Configuration
+
+![assets/img/dc-promote.png](assets/img/dc-promote.png)
+
+```bash
+Click "Flag" icon
+Click "Promote this server to a domain controller"
+Keep default option "Add a domain controller to an existing domain", click "Next"
+Keep default option
+# Domain Name System (DNS) Server checked
+# Global Catalog (GC) checked
+# Read only domain controller (RODC) unchecked
+# Site name: Default-First-Site-Name
+Input the Directory Services Restore Mode (DSRM) password, click "Next"
+Keep default DNS Options, click "Next"
+Keep default Additional Options, click "Next"
+Keep default options of AD DS database, log files, and SYSVOL, click "Next"
+Click "Next"
+Click "Install" after Prerequisites Check done
+```
+
+List domain controller
+```bash
+Get-ADGroupMember "Domain Controllers"
+
+distinguishedName : CN=BJDC02,OU=Domain Controllers,DC=alphabook,DC=cn
+name              : BJDC02
+objectClass       : computer
+objectGUID        : 65d42249-74d7-4b35-be83-8192c782ca3c
+SamAccountName    : BJDC02$
+SID               : S-1-5-21-1387974904-744306665-268114308-1103
+
+distinguishedName : CN=BJDC01,OU=Domain Controllers,DC=alphabook,DC=cn
+name              : BJDC01
+objectClass       : computer
+objectGUID        : 8d1cf2be-0c95-4815-8e74-5ed711c62146
+SamAccountName    : BJDC01$
+SID               : S-1-5-21-1387974904-744306665-268114308-1000
+
+# 
+Get-ADGroupMember "Domain Controllers" | Get-ADDomainController | Select-Object Name,Forest,Domain,Site,IsGlobalCatalog,IPv4Address | Format-Table
+
+Name   Forest       Domain       Site                    IsGlobalCatalog IPv4Address
+----   ------       ------       ----                    --------------- -----------
+BJDC02 alphabook.cn alphabook.cn Default-First-Site-Name            True 10.10.10.11
+BJDC01 alphabook.cn alphabook.cn Default-First-Site-Name            True 10.10.10.10
+```
