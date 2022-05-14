@@ -4,12 +4,12 @@
     - title: "Active Directory Domain Services"
       url: "index"
       children:
-        - title: Features
-          url: "docs/getting-started#getting-started"
-        - title: Development
-          url: "docs/getting-started#development"
-        - title: Customization
-          url: "docs/getting-started#customization"
+        - title: Network Topology
+          url: "index#network-topology"
+        - title: Install first domain controller
+          url: "#install-first-domain-controller"
+        - title: Install second/backup domain controller
+          url: "#install-secondbackup-domain-controller"
     - title: "DHCP Server"
       url: "docs/dhcp-server" 
     - title: "File Server"
