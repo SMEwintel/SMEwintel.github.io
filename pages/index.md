@@ -13,7 +13,7 @@ permalink: /
 
 ![assets/img/ad.png](assets/img/ad.png)
 
-## Network Topology
+## 1. Network Topology
 
 Network is the basis of the whole IT infrastructure. We can not imagine the situation without network.
 
@@ -25,13 +25,13 @@ IP Addresses reserved for use on private networks
 
 {% include alert.html type="secondary" title="Class C" content="192.168.0.0 to 192.168.255.255" %}
 
-### Choosing private IPv4 address
+### 1.1 Choosing private IPv4 address
 
 1. We need to reserve enough IP address for all devices (Desktop, Laptop, Mobile, etc), Class A may be good choose. 
 
 2. Pay attention to potential IP confiction in your environment (Docker may use IP address of Class B, etc).
 
-### Example of a company with three Offices
+### 1.2 Example of a company with three Offices
 
 ```bash
 Beijing Office 10.10.0.0/255.255.0.0
@@ -39,7 +39,7 @@ Shanghai Office 10.20.0.0/255.255.0.0
 Shenzhen Office 10.30.0.0/255.255.0.0
 ```
 
-### Example of Beijing office
+### 1.3 Example of Beijing office
 
 ```bash
 Windows Server 10.10.10.0/255.255.255.0 (Available IP address 10.10.10.1 - 10.10.10.254)
@@ -52,7 +52,7 @@ BJDC01 10.10.10.10/255.255.255.0
 BJDC02 10.10.10.11/255.255.255.0
 ```
 
-## Active Directory Domain Services Design
+## 2. Active Directory Domain Services Design
 
 * Single forest single domain is preferred, 2,150,000,000 objects per domain, FQDN less than 64 characters
 * Selecting the Forest Root Domain (corp.alphabook.cn) https://technet.microsoft.com/en-us/library/cc726016(v=ws.10).aspx
@@ -66,9 +66,9 @@ BJDC02 10.10.10.11/255.255.255.0
 * [[Account Lockout]] Policy
 * [[Delegate IT helpdesk group join computer into domain permission]]
 
-## Install first domain controller
+## 3. Install first domain controller
 
-### Install Windows Server 2019
+### 3.1 Install Windows Server 2019
 
 ```bash
 # Check Operating System version
@@ -76,7 +76,7 @@ BJDC02 10.10.10.11/255.255.255.0
 Microsoft Windows Server 2019 Standard
 ```
 
-### Rename hostname
+### 3.2 Rename hostname
 
 ```bash
 # BJ stands for Beijing
@@ -86,7 +86,7 @@ Restart-Computer
 Get-Content Env:COMPUTERNAME
 ```
 
-### Configure IP information
+### 3.3 Configure IP information
 
 ```bash
 IP address: 10.10.10.10
@@ -95,7 +95,7 @@ Default gateway: 10.10.10.1
 Preferred DNS server: 10.10.10.10
 ```
 
-### Install Active Directory Domain Services
+### 3.4 Install Active Directory Domain Services
 
 ```bash
 From Start Menu, Click "Server Manager"
@@ -111,7 +111,7 @@ Click "Install"
 Click "Close" when finish
 ```
 
-### Post-deployment Configuration
+### 3.5 Post-deployment Configuration
 
 ![assets/img/dc-promote.png](assets/img/dc-promote.png)
 
@@ -133,14 +133,14 @@ Click "Next"
 Click "Install" after Prerequisites Check done
 ```
 
-### Configure time
+### 3.6 Configure time
 
 ```bash
 # By default, the first domain controller is PDC too, PDC is the time root of the forest.
 w32tm /config /computer:BJDC01.alphabook.cn /manualpeerlist:time.windows.com /syncfromflags:manual /update
 ```
 
-### FSMO Role Holders
+### 3.7 FSMO Role Holders
 
 {% include alert.html type="warning" title="Schema master / Forest level" content="To make change Schema in forest (such as implement Exchange, Lync, SCCM)" %}
 
@@ -177,9 +177,9 @@ BJDC01.alphabook.cn  BJDC01.alphabook.cn BJDC01.alphabook.cn
 ```
 
 
-## Install second/backup domain controller
+## 4. Install second/backup domain controller
 
-### Install Windows Server 2019
+### 4.1 Install Windows Server 2019
 
 ```bash
 # Check Operating System version
@@ -187,7 +187,7 @@ BJDC01.alphabook.cn  BJDC01.alphabook.cn BJDC01.alphabook.cn
 Microsoft Windows Server 2019 Standard
 ```
 
-### Rename hostname
+### 4.2 Rename hostname
 
 ```bash
 # BJ stands for Beijing
@@ -197,7 +197,7 @@ Restart-Computer
 Get-Content Env:COMPUTERNAME
 ```
 
-### Configure IP information
+### 4.3 Configure IP information
 
 ```bash
 IP address: 10.10.10.11
@@ -206,7 +206,7 @@ Default gateway: 10.10.10.1
 Preferred DNS server: 10.10.10.10
 ```
 
-### Join Domain
+### 4.4 Join Domain
 
 ```bash
 # Do a ping test
@@ -227,7 +227,7 @@ Approximate round trip times in milli-seconds:
 Add-Computer –Domainname "alphabook.cn"  -Restart
 ```
 
-### Install Active Directory Domain Services
+### 4.5 Install Active Directory Domain Services
 
 ```bash
 # Log in with domain administrator (alphabook\administrator)
@@ -243,7 +243,7 @@ Click "Install"
 Click "Close" when finish
 ```
 
-### Post-deployment Configuration
+### 4.6 Post-deployment Configuration
 
 ![assets/img/dc-promote.png](assets/img/dc-promote.png)
 
